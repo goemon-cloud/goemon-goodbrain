@@ -1,3 +1,54 @@
 *:focus {
     outline: none;
 }
+
+.eeg {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.eeg-value {
+    font-weight: normal;
+    color: #999;
+    font-size: 0.8em;
+}
+
+.eeg-value-container {
+    margin-top: 12px;
+}
+
+.eeg-notice-ok {
+    font-weight: normal;
+    color: #999;
+    font-size: 0.8em;
+}
+
+.eeg-notice-ng {
+    font-weight: normal;
+    color: #000;
+    font-size: 0.8em;
+}
+
+.brain-progress-container-base {
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.brain-progress-container {
+    width:100%;
+    height:10px;
+    position:relative;
+    background-color:#f1f1f1;
+}
+
+.brain-progressbar {
+    background-color:#346eeb;
+    height:100%;
+    position:absolute;
+    line-height:inherit;
+}
+
+.brain-round-xlarge{
+    border-radius:5px !important;
+}
