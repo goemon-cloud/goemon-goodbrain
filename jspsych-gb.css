@@ -2,6 +2,11 @@
     outline: none;
 }
 
+.word-attention {
+    font-weight: normal !important;
+    font-size: 3em !important;
+}
+
 .eeg {
     font-weight: bold;
     font-size: 1.2em;
