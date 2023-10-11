@@ -28,10 +28,10 @@
       console.log('Words', words.length);
       const panelHeight = trial.panelHeight || '70vh';
       display_element.innerHTML = '<div style="height: ' + panelHeight + '; position: relative;"><div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><span class="word" style="font-weight: bold; font-size: 2em;"></span></div></div>';
-      this.runTrial(display_element, trial, words, events);
+      this.runTrial(display_element, trial, 1 /* first trial*/, words, events);
     }
     
-    runTrial(display_element, trial, words, events) {
+    runTrial(display_element, trial, trialId, words, events) {
       if (words.length === 0) {
         $(display_element).find('.word').text('');
         events.push({
@@ -73,9 +73,10 @@
               endTime: st + trial.textDuration,
               text: word.word,
               label: word.label,
+              trialId: trialId,
             });
           }
-          this.runTrial(display_element, trial, words, events);
+          this.runTrial(display_element, trial, trialId + 1, words, events);
         }, trial.textDuration);
       };
       var func = showText;
@@ -91,6 +92,7 @@
                 endTime: fixationStartTime + trial.fixationDuration,
                 text: word.word,
                 label: word.label,
+                trialId: trialId,
               });
             }
             setTimeout(showText, trial.blankAfterFixationDuration);
