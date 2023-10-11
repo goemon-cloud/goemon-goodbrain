@@ -79,13 +79,22 @@
         }, trial.textDuration);
       };
       var func = showText;
-      if (trial.attentionDuration) {
+      if (trial.fixationDuration) {
         func = () => {
-          $(display_element).find('.word').addClass('word-attention').text('+');
+          $(display_element).find('.word').addClass('word-fixation').text('+');
+          const fixationStartTime = Date.now();
           setTimeout(() => {
-            $(display_element).find('.word').removeClass('word-attention').text('');
-            setTimeout(showText, trial.blankAfterAttentionDuration);
-          }, trial.attentionDuration);
+            $(display_element).find('.word').removeClass('word-fixation').text('');
+            if (trial.onFixationShown) {
+              trial.onFixationShown({
+                startTime: fixationStartTime,
+                endTime: fixationStartTime + trial.fixationDuration,
+                text: word.word,
+                label: word.label,
+              });
+            }
+            setTimeout(showText, trial.blankAfterFixationDuration);
+          }, trial.fixationDuration);
         };
       }
       setTimeout(func, trial.blankDuration);
@@ -116,11 +125,11 @@
         type: jsPsychModule.ParameterType.INT,
         default: 1000,
       },
-      attentionDuration: {
+      fixationDuration: {
         type: jsPsychModule.ParameterType.INT,
         default: 0,
       },
-      blankAfterAttentionDuration: {
+      blankAfterFixationDuration: {
         type: jsPsychModule.ParameterType.INT,
         default: 100,
       },
@@ -129,6 +138,10 @@
         default: null,
       },
       onShown: {
+        type: jsPsychModule.ParameterType.FUNCTION,
+        default: undefined,
+      },
+      onFixationShown: {
         type: jsPsychModule.ParameterType.FUNCTION,
         default: undefined,
       },
